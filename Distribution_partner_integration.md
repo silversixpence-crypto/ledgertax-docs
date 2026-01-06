@@ -2,7 +2,7 @@
 # LedgerTax — Distribution Partner Integration Guide  
 **Rev 0 (Draft)**  
 **Audience:** Distribution partners (exchanges, brokers, trading platforms, bots, wallets) who want to offer **LedgerTax** to their users via an embedded “Tax Reporting” experience.
-
+  
 > This document is intentionally a mix of narrative + technical guidance. It should be readable by product people and directly usable by engineers.
 
 ---
