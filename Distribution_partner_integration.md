@@ -74,7 +74,7 @@ You link to LedgerTax with:
 
 ---
 
-### Model 2 — One-click provisioning (recommended for serious partners)
+### Model 2 — One-click provisioning (recommended for advanced partners)
 You do a **server-to-server call** to LedgerTax to:
 - create or match a user
 - create a **Source** for your platform
@@ -90,7 +90,7 @@ Then redirect the user to LedgerTax where the data is already loading.
 
 ### Model 3 — White-label / embedded (future / advanced)
 LedgerTax can be embedded (e.g., iframe or partner-hosted UI calling LedgerTax APIs).
-This is not the default approach today, but we can support it for larger partners.
+This is not currently the default approach, but can be supported for larger partners.
 
 ---
 
