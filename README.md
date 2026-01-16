@@ -1,6 +1,3 @@
-# ledgertax-docs
-
-```md
 # LedgerTax — Distribution Partner Integration Guide  
 **Rev 0 (Draft)**  
 **Audience:** Distribution partners (exchanges, brokers, trading platforms, bots, wallets) who want to offer **LedgerTax** to their users via an embedded “Tax Reporting” experience.
@@ -177,10 +174,8 @@ All requests:
 We recommend signing the canonical string:
 
 ```
-
 <timestamp>.<nonce>.<http_method>.<path>.<sha256(body)>
-
-````
+```
 
 Then:
 
@@ -200,7 +195,22 @@ export function signRequest({ secret, timestamp, nonce, method, path, bodyJson }
   const canonical = `${timestamp}.${nonce}.${method.toUpperCase()}.${path}.${sha256Hex(body)}`;
   return crypto.createHmac("sha256", secret).update(canonical).digest("hex");
 }
-````
+```
+
+---
+
+### Partner Registration API (LedgerTax)
+
+> **📋 [View detailed Partner Registration API documentation](./partner-registration-api.md)**
+
+This is the current production-ready partner endpoint used for automated user provisioning and source creation. The dedicated documentation covers:
+
+- Complete endpoint specification (`POST /api/v1/partner/register`)
+- Authentication requirements
+- Request/response schemas
+- Field validation rules
+- Error handling
+- XAGO-specific setup instructions
 
 ---
 
@@ -648,7 +658,3 @@ If partners want billing/report status updates, LedgerTax can send webhooks.
 
 * Rev 0: Initial draft for partner distribution integrations.
 
-```
-
-If you tell me what folder structure you want inside `ledgertax-docs` (e.g., `md/`, `assets/`, `diagrams/`), I can adapt the image paths and split this into multiple files (e.g., `overview.md`, `api.md`, `ux.md`) without changing the substance.
-```
