@@ -239,7 +239,7 @@ Creates or matches a LedgerTax user and attaches one or more **Sources**.
   "attribution": {
     "source": "partner",
     "campaign": "tax-season-2026",
-    "coupon_code": "XagoTax2025"
+    "coupon_code": "XagoTax2026"
   },
   "sources": [
     {
@@ -405,7 +405,7 @@ Partners often display a discount code on the Tax Reporting page.
 
 Example (as seen in mockups):
 
-* `XagoTax2025`
+* `XagoTax2026`
 * `IDATCOTax2026`
 
 LedgerTax can configure coupons to:
@@ -525,7 +525,7 @@ LedgerTax will echo this in responses and logs, making support much faster.
   * Automatically import your Xago trades and transactions
   * Calculate crypto gains/losses and taxable events
   * Generate SARS-ready tax reports
-* Coupon block: `XagoTax2025`
+* Coupon block: `XagoTax2026`
 * CTA button: “Go to LedgerTax”
 
 ### Example: IDATCO integration page
@@ -562,7 +562,7 @@ LedgerTax will echo this in responses and logs, making support much faster.
   "attribution": {
     "source": "partner",
     "campaign": "tax-season-2026",
-    "coupon_code": "XagoTax2025"
+    "coupon_code": "XagoTax2026"
   },
   "sources": [
     {
@@ -648,7 +648,7 @@ If partners want billing/report status updates, LedgerTax can send webhooks.
     "currency": "ZAR",
     "value": 2000
   },
-  "coupon_code": "XagoTax2025"
+  "coupon_code": "XagoTax2026"
 }
 ```
 

@@ -21,7 +21,7 @@ Each partner receives a unique token. Tokens are rotated on request.
   "name": "John",
   "surname": "Doe",
   "partner_source": "XAGO",
-  "discount_code": "XagoTax2025",
+  "discount_code": "XagoTax2026",
   "jurisdiction": "ZA",
   "api_credentials": [
     {
@@ -59,7 +59,7 @@ Each partner receives a unique token. Tokens are rotated on request.
   "sources_added": 1,
   "sources_skipped": 0,
   "discount_applied": {
-    "code": "XagoTax2025",
+    "code": "XagoTax2026",
     "amount": 500,
     "currency": "ZAR",
     "valid_until": "2026-02-15T23:59:59Z"
@@ -90,7 +90,7 @@ The account is still created, but discount fields return an error code:
 ```json
 {
   "discount_applied": null,
-  "discount_message": "Discount code 'XagoTax2025' is invalid or expired",
+  "discount_message": "Discount code 'XagoTax2026' is invalid or expired",
   "discount_error_code": "INVALID_DISCOUNT_CODE"
 }
 ```
@@ -109,7 +109,7 @@ The account is still created, but discount fields return an error code:
   - `PARTNER_TOKEN_XAGO=<provided_by_ledgertax>`
 
 ### Recommended discount setup
-- Coupon code: `XagoTax2025`
+- Coupon code: `XagoTax2026`
 - Validity: 30 days from user registration
 - Currency: ZAR
 
@@ -120,7 +120,7 @@ The account is still created, but discount fields return an error code:
   "name": "Jane",
   "surname": "Doe",
   "partner_source": "XAGO",
-  "discount_code": "XagoTax2025",
+  "discount_code": "XagoTax2026",
   "jurisdiction": "ZA",
   "api_credentials": [
     {
