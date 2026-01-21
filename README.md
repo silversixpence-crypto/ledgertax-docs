@@ -203,18 +203,69 @@ export function signRequest({ secret, timestamp, nonce, method, path, bodyJson }
 
 > **📋 [View detailed Partner Registration API documentation](./partner-registration-api.md)**
 
-This is the current production-ready partner endpoint used for automated user provisioning and source creation. The dedicated documentation covers:
+This is the current **production-ready** partner endpoint with **passwordless sign-in flow** for automated user provisioning and source creation.
 
-- Complete endpoint specification (`POST /api/v1/partner/register`)
+#### Key Features
+- ✅ **Passwordless onboarding** - 30-day secure sign-in links (no password management for partners)
+- ✅ **Duplicate detection** - Prevents creating duplicate exchange connections  
+- ✅ **Detailed feedback** - Per-source status with skip reasons
+- ✅ **Self-service password setup** - Users set their own password during onboarding
+- ✅ **Automatic discounts** - Partner discount codes applied at registration
+
+#### Quick Integration
+```bash
+POST /api/v1/partner/register
+Authorization: Bearer <partner_token>
+
+{
+  "email": "user@example.com",
+  "name": "First",
+  "surname": "Last",
+  "partner_source": "XAGO",
+  "discount_code": "XagoTax2026",
+  "jurisdiction": "ZA",
+  "api_credentials": [
+    {
+      "exchange_name": "LUNO",
+      "api_key": "...",
+      "api_secret": "..."
+    }
+  ]
+}
+```
+
+**Response includes:**
+- `redirect_url` - Secure sign-in link (valid 30 days)
+- `link_expires_at` - Link expiration timestamp
+- `source_details` - Per-source status (added/skipped)
+- `onboarding_instructions` - Password setup guidance
+
+#### Integration Flow
+1. Partner calls API with user credentials
+2. API returns secure sign-in link in `redirect_url`
+3. Partner redirects user to sign-in link
+4. User automatically signed in (no password needed)
+5. User sets password during onboarding
+6. Future access via email + password
+
+#### Documentation
+The dedicated documentation covers:
+- Complete endpoint specification
 - Authentication requirements
-- Request/response schemas
+- Request/response schemas with all new fields
 - Field validation rules
+- Passwordless sign-in flow
+- Password setup implementation guide
+- Duplicate source detection
 - Error handling
 - XAGO-specific setup instructions
+- Supported exchanges list
 
 ---
 
-### POST `/v1/partners/provision`
+### POST `/v1/partners/provision` (Legacy)
+
+> **⚠️ Note:** This is a legacy endpoint. New integrations should use **`POST /api/v1/partner/register`** which includes passwordless sign-in flow and improved duplicate detection. See [Partner Registration API documentation](./partner-registration-api.md) for details.
 
 Creates or matches a LedgerTax user and attaches one or more **Sources**.
 
@@ -345,18 +396,43 @@ Common codes:
 
 ## Redirect + session handoff
 
-After provisioning, redirect the user to:
+### Modern Approach: Passwordless Sign-In (Recommended)
+
+When using **`POST /api/v1/partner/register`**, redirect users to the `redirect_url` in the response:
+
+```json
+{
+  "redirect_url": "https://ledgertax.com/sign-in#/?__clerk_ticket=eyJhbG...",
+  "link_expires_at": "2026-02-20T12:00:00Z"
+}
+```
+
+**Key Features:**
+- ✅ 30-day validity (vs 60-180 seconds for legacy tokens)
+- ✅ No password required for initial access
+- ✅ Users set their own password during onboarding
+- ✅ Cryptographically signed secure tokens
+
+> See [Partner Registration API](./partner-registration-api.md) for details.
+
+---
+
+### Legacy Approach: Short-Lived Handoff Tokens
+
+For legacy endpoints, redirect the user to:
 
 * `handoff_url` returned by `/provision`, or
 * `https://app.ledgertax.io/handoff/<token>` (depending on configuration)
 
-### Handoff token behavior
+### Legacy Handoff Token Behavior
 
-* Short-lived (e.g., 60–180 seconds)
+* Short-lived (60–180 seconds)
 * Single-use recommended
 * Creates/continues an authenticated LedgerTax session
 * Sets partner attribution (if not already set)
 * Sends user to the correct landing screen (`overview`, `sources`, etc.)
+
+> **⚠️ Note:** New integrations should use the passwordless flow via `/api/v1/partner/register`.
 
 ### Return URL
 
